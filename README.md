@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HabitGrid
+
+A GitHub-style contribution graph for daily habits. Track your consistency with beautiful heatmap visualizations.
+
+![Next.js](https://img.shields.io/badge/Next.js-16-black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
+
+## Features
+
+- **GitHub-style heatmaps** — Each habit gets its own 52-week contribution grid
+- **Click to complete** — Toggle any day on the grid
+- **Streaks** — Current streak and longest streak tracking
+- **Stats** — Weekly/monthly completion percentages, best day analysis
+- **Today view** — Quick-complete buttons for all habits
+- **Year in review** — Summary stats across all habits
+- **Custom colors** — Pick a color for each habit (8 options)
+- **Dark/light mode** — Smooth theme switching
+- **Import/export** — Backup and restore data as JSON
+- **100% local** — All data stored in localStorage, no server needed
+
+## Tech Stack
+
+- [Next.js](https://nextjs.org/) 16 (App Router)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/) v4
+- [Zustand](https://zustand-demo.pmnd.rs/) for state management
+- [Framer Motion](https://www.framer.com/motion/) for animations
+- [Lucide React](https://lucide.dev/) for icons
+- [date-fns](https://date-fns.org/) for date utilities
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Clone the repo
+git clone https://github.com/yourusername/HabitGrid.git
+cd HabitGrid
+
+# Install dependencies
+npm install
+
+# Run dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to start tracking.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Click **New Habit** to add a habit with a name, optional daily goal, and color
+2. Click any cell on the heatmap to mark that day as complete
+3. Use the **Today** panel for quick daily check-ins
+4. Track your streaks and completion rates in the stats bar
+5. Export your data anytime with the **Export** button
 
-## Learn More
+## Data
 
-To learn more about Next.js, take a look at the following resources:
+All data lives in your browser's `localStorage` under the key `habitgrid-storage`. Use the Export/Import buttons to back up or transfer your data.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Screenshots
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+_Coming soon_
 
-## Deploy on Vercel
+## Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Contributions welcome! Feel free to open issues or submit PRs.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+[MIT](LICENSE)
