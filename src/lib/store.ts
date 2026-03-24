@@ -2,11 +2,16 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { format, differenceInCalendarDays, startOfDay, subDays, eachDayOfInterval, startOfWeek, endOfWeek, startOfMonth, endOfMonth, isToday, parseISO } from 'date-fns';
 
+export type HabitCategory = 'Health' | 'Fitness' | 'Productivity' | 'Learning' | 'Other';
+
+export const HABIT_CATEGORIES: HabitCategory[] = ['Health', 'Fitness', 'Productivity', 'Learning', 'Other'];
+
 export interface Habit {
   id: string;
   name: string;
   color: string;
   goal: string;
+  category: HabitCategory;
   createdAt: string;
 }
 
@@ -15,9 +20,9 @@ export interface HabitStore {
   completions: Record<string, Record<string, boolean>>; // habitId -> dateStr -> completed
   darkMode: boolean;
 
-  addHabit: (name: string, color: string, goal: string) => void;
+  addHabit: (name: string, color: string, goal: string, category?: HabitCategory) => void;
   removeHabit: (id: string) => void;
-  editHabit: (id: string, updates: Partial<Pick<Habit, 'name' | 'color' | 'goal'>>) => void;
+  editHabit: (id: string, updates: Partial<Pick<Habit, 'name' | 'color' | 'goal' | 'category'>>) => void;
   toggleCompletion: (habitId: string, date: string) => void;
   isCompleted: (habitId: string, date: string) => boolean;
   getCompletedDates: (habitId: string) => Set<string>;
@@ -42,10 +47,10 @@ export const useHabitStore = create<HabitStore>()(
       completions: {},
       darkMode: false,
 
-      addHabit: (name, color, goal) => {
+      addHabit: (name, color, goal, category = 'Other') => {
         const id = generateId();
         set((state) => ({
-          habits: [...state.habits, { id, name, color, goal, createdAt: new Date().toISOString() }],
+          habits: [...state.habits, { id, name, color, goal, category, createdAt: new Date().toISOString() }],
           completions: { ...state.completions, [id]: {} },
         }));
       },

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useHabitStore } from '@/lib/store';
+import { useHabitStore, HABIT_CATEGORIES, HabitCategory } from '@/lib/store';
 import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -26,14 +26,16 @@ export default function AddHabitModal({ open, onClose }: AddHabitModalProps) {
   const [name, setName] = useState('');
   const [goal, setGoal] = useState('');
   const [color, setColor] = useState(COLORS[0]);
+  const [category, setCategory] = useState<HabitCategory>('Other');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim()) return;
-    addHabit(name.trim(), color, goal.trim());
+    addHabit(name.trim(), color, goal.trim(), category);
     setName('');
     setGoal('');
     setColor(COLORS[0]);
+    setCategory('Other');
     onClose();
   };
 
@@ -88,6 +90,21 @@ export default function AddHabitModal({ open, onClose }: AddHabitModalProps) {
                   placeholder="e.g., 30 minutes of reading"
                   className="w-full bg-muted border border-card-border rounded-lg px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
                 />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-1">
+                  Category
+                </label>
+                <select
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value as HabitCategory)}
+                  className="w-full bg-muted border border-card-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+                >
+                  {HABIT_CATEGORIES.map((cat) => (
+                    <option key={cat} value={cat}>{cat}</option>
+                  ))}
+                </select>
               </div>
 
               <div>
