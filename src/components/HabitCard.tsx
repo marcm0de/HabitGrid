@@ -243,11 +243,9 @@ export default function HabitCard({ habit }: HabitCardProps) {
 
       {/* Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 mt-4">
-        <StatBadge
-          icon={<Flame size={14} />}
-          label="Current Streak"
-          value={`${currentStreak}d`}
-          color={currentStreak > 0 ? habit.color : undefined}
+        <AnimatedStreakBadge
+          streak={currentStreak}
+          color={habit.color}
         />
         <StatBadge
           icon={<Trophy size={14} />}
@@ -275,6 +273,54 @@ export default function HabitCard({ habit }: HabitCardProps) {
           value={bestDay || '—'}
         />
       </div>
+    </motion.div>
+  );
+}
+
+function AnimatedStreakBadge({ streak, color }: { streak: number; color: string }) {
+  const isHot = streak >= 7;
+  const isOnFire = streak >= 30;
+
+  return (
+    <motion.div
+      className="flex items-center gap-2 rounded-lg px-3 py-2 relative overflow-hidden"
+      style={{ backgroundColor: streak > 0 ? `${color}15` : undefined }}
+      animate={isOnFire ? {
+        boxShadow: [`0 0 0px ${color}00`, `0 0 12px ${color}40`, `0 0 0px ${color}00`],
+      } : {}}
+      transition={isOnFire ? { duration: 2, repeat: Infinity } : {}}
+    >
+      <motion.span
+        animate={isHot ? { rotate: [0, -10, 10, -10, 0], scale: [1, 1.2, 1] } : {}}
+        transition={isHot ? { duration: 0.6, repeat: Infinity, repeatDelay: 2 } : {}}
+        style={{ color: streak > 0 ? color : undefined }}
+      >
+        <Flame size={14} />
+      </motion.span>
+      <div>
+        <motion.div
+          className="text-xs font-medium"
+          style={streak > 0 ? { color } : {}}
+          key={streak}
+          initial={{ scale: 1.5, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+        >
+          {streak}d
+          {isOnFire && ' 🔥'}
+          {isHot && !isOnFire && ' ⚡'}
+        </motion.div>
+        <div className="text-[10px] text-muted-foreground">Current Streak</div>
+      </div>
+      {streak > 0 && (
+        <motion.div
+          className="absolute bottom-0 left-0 h-[2px]"
+          style={{ backgroundColor: color }}
+          initial={{ width: '0%' }}
+          animate={{ width: `${Math.min((streak / 30) * 100, 100)}%` }}
+          transition={{ duration: 1, ease: 'easeOut' }}
+        />
+      )}
     </motion.div>
   );
 }

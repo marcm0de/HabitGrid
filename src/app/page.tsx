@@ -5,6 +5,7 @@ import { useHabitStore } from '@/lib/store';
 import HabitCard from '@/components/HabitCard';
 import TodayView from '@/components/TodayView';
 import YearReview from '@/components/YearReview';
+import WeeklyCalendar from '@/components/WeeklyCalendar';
 import AddHabitModal from '@/components/AddHabitModal';
 import DataManager from '@/components/DataManager';
 import ThemeToggle from '@/components/ThemeToggle';
@@ -70,6 +71,9 @@ export default function Home() {
           <>
             {/* Today View */}
             <TodayView />
+
+            {/* Weekly Calendar */}
+            <WeeklyCalendar />
 
             {/* Year in Review */}
             <YearReview />
