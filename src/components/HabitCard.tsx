@@ -337,12 +337,12 @@ function StatBadge({
   color?: string;
 }) {
   return (
-    <div className="flex items-center gap-2 bg-muted rounded-lg px-3 py-2">
+    <div className="flex items-center gap-2 bg-muted/80 rounded-xl px-3 py-2.5 border border-card-border/50 hover:bg-muted transition-colors">
       <span className="text-muted-foreground" style={color ? { color } : {}}>
         {icon}
       </span>
       <div>
-        <div className="text-xs font-medium" style={color ? { color } : {}}>
+        <div className="text-xs font-semibold" style={color ? { color } : {}}>
           {value}
         </div>
         <div className="text-[10px] text-muted-foreground">{label}</div>

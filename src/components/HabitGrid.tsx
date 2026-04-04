@@ -150,15 +150,16 @@ export default function HabitGrid({ habitId, color }: HabitGridProps) {
                   return (
                     <motion.div
                       key={dateStr}
-                      whileHover={{ scale: 1.4 }}
-                      whileTap={{ scale: 0.9 }}
+                      whileHover={{ scale: 1.5, zIndex: 10 }}
+                      whileTap={{ scale: 0.85 }}
                       onClick={() => !isFuture && toggleCompletion(habitId, dateStr)}
-                      className="rounded-sm cursor-pointer"
+                      className="rounded-[3px] cursor-pointer transition-shadow duration-150"
                       style={{
                         width: 13,
                         height: 13,
                         backgroundColor: bgColor,
                         border: isFuture ? '1px solid transparent' : 'none',
+                        boxShadow: completed ? `0 0 6px ${bgColor}60` : 'none',
                       }}
                       title={`${dateStr}${completed ? ' ✓' : ''}`}
                     />
